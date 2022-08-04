@@ -1,10 +1,7 @@
 make --dry-run --keep-going --print-directory
 make: Entering directory '/home/fedi/Desktop/PeachOS'
-i686-elf-gcc -I./src -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/kernel.c -o ./build/kernel.o
  
-i686-elf-gcc -I./src -I./src/memory/paging -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/memory/paging/paging.c -o ./build/memory/paging/paging.o
-nasm -f elf -g ./src/memory/paging/paging.asm -o ./build/memory/paging/paging.asm.o
-i686-elf-ld -g -relocatable ./build/kernel.asm.o ./build/kernel.o ./build/idt/idt.asm.o ./build/idt/idt.o ./build/memory/memory.o ./build/io/io.asm.o ./build/memory/heap/heap.o ./build/memory/heap/kheap.o ./build/memory/paging/paging.o ./build/memory/paging/paging.asm.o -o ./build/kernelfull.o
+i686-elf-ld -g -relocatable ./build/kernel.asm.o ./build/kernel.o ./build/disk/disk.o ./build/fs/pparser.o ./build/string/string.o ./build/idt/idt.asm.o ./build/idt/idt.o ./build/memory/memory.o ./build/io/io.asm.o ./build/memory/heap/heap.o ./build/memory/heap/kheap.o ./build/memory/paging/paging.o ./build/memory/paging/paging.asm.o -o ./build/kernelfull.o
 i686-elf-gcc -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -T ./src/linker.ld -o ./bin/kernel.bin -ffreestanding -O0 -nostdlib ./build/kernelfull.o
 rm -rf ./bin/os.bin
 dd if=./bin/boot.bin >> ./bin/os.bin
