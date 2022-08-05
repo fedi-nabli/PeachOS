@@ -35,7 +35,7 @@ int disk_read_sector(int lba, int total, void* buf) {
 void disk_search_and_init() {
   memset(&disk, 0, sizeof(disk));
   disk.type = PEACHOS_DISK_TYPE_REAL;
-  disk.sector_size = PEACHOS_DISK_SECTOR_SIZE;
+  disk.sector_size = PEACHOS_SECTOR_SIZE;
 }
 
 struct disk* disk_get(int index) {
