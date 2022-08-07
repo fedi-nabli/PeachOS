@@ -44,7 +44,7 @@ struct file_descriptor {
 };
 
 void fs_init();
-int fs_open(const char* filename, const char* mode_str);
+int fopen(const char* filename, const char* mode_str);
 void fs_insert_filesystem(struct filesystem* filesystem);
 struct filesystem* fs_resolve(struct disk* disk);
 

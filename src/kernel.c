@@ -2,7 +2,6 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "idt/idt.h"
-#include "io/io.h"
 #include "memory/heap/kheap.h"
 #include "memory/paging/paging.h"
 #include "string/string.h"
@@ -87,7 +86,10 @@ void kernel_main() {
   // Enable the system interrupts
   enable_interrupts();
 
-  char buf[20];
-  strcpy(buf, "hello!");
+  int fd = fopen("0:/hello.txt", "r");
+  if (fd) {
+    print("We opened hello.txt");
+  }
+
   while (1) {}
 }
