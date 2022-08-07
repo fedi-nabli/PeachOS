@@ -7,9 +7,9 @@
 typedef unsigned int FILE_SEEK_MODE;
 
 enum {
-  FILE_SET,
-  FILE_CUR,
-  FILE_END
+  SEEK_SET,
+  SEEK_CUR,
+  SEEK_END
 };
 
 typedef unsigned int FILE_MODE;
