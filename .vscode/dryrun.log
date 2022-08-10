@@ -1,21 +1,22 @@
 make --dry-run --keep-going --print-directory
 make: Entering directory '/home/fedi/Desktop/PeachOS'
+nasm -f elf -g ./src/task/task.asm -o ./build/task/task.asm.o
+i686-elf-ld -g -relocatable ./build/kernel.asm.o ./build/kernel.o ./build/disk/disk.o ./build/disk/streamer.o ./build/fs/file.o ./build/fs/fat/fat16.o ./build/fs/pparser.o ./build/string/string.o ./build/idt/idt.asm.o ./build/idt/idt.o ./build/gdt/gdt.asm.o ./build/task/tss.asm.o ./build/task/task.o ./build/task/task.asm.o ./build/task/process.o ./build/gdt/gdt.o ./build/memory/memory.o ./build/io/io.asm.o ./build/memory/heap/heap.o ./build/memory/heap/kheap.o ./build/memory/paging/paging.o ./build/memory/paging/paging.asm.o -o ./build/kernelfull.o
+i686-elf-gcc -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -T ./src/linker.ld -o ./bin/kernel.bin -ffreestanding -O0 -nostdlib ./build/kernelfull.o
+cd ./programs/blank && make all
  
+make[1]: Entering directory '/home/fedi/Desktop/PeachOS/programs/blank'
+nasm -f elf ./blank.asm -o ./build/blank.o
+i686-elf-gcc -g -T ./linker.ld -o ./blank.bin -ffreestanding -O0 -nostdlib -fpic -g ./build/blank.o
+make[1]: Leaving directory '/home/fedi/Desktop/PeachOS/programs/blank'
 rm -rf ./bin/os.bin
- 
 dd if=./bin/boot.bin >> ./bin/os.bin
- 
 dd if=./bin/kernel.bin >> ./bin/os.bin
- 
 dd if=/dev/zero bs=1048576 count=16 >> ./bin/os.bin
- 
 sudo mount -t vfat ./bin/os.bin /mnt/d
- 
 # Copy a file over
- 
 sudo cp ./hello.txt /mnt/d
- 
+sudo cp ./programs/blank/blank.bin /mnt/d
 sudo umount /mnt/d
- 
 make: Leaving directory '/home/fedi/Desktop/PeachOS'
  
