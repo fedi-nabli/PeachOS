@@ -3,5 +3,5 @@
   "files.associations": {
     "stdbool.h": "c"
   },
-  "C_Cpp.errorSquiggles": "Enabled"
+  "C_Cpp.errorSquiggles": "Disabled"
 }
