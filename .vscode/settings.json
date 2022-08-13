@@ -1,7 +1,10 @@
 {
   "editor.tabSize": 2,
   "files.associations": {
-    "stdbool.h": "c"
+    "stdbool.h": "c",
+    "misc.h": "c",
+    "string.h": "c",
+    "idt.h": "c"
   },
   "C_Cpp.errorSquiggles": "Disabled"
 }
