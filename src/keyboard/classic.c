@@ -12,7 +12,7 @@ int classic_keyboard_init();
 static uint8_t keyboard_scan_set_one[] = {
   0x00, 0x1B, '1', '2', '3', '4', '5',
   '6', '7', '8', '9', '0', '-', '=',
-  0x08, '\t', 'A', 'A', 'E', 'R', 'T',
+  0x08, '\t', 'A', 'Z', 'E', 'R', 'T',
   'Y', 'U', 'I', 'O', 'P', '^', '$',
   0x0d, 0x00, 'Q', 'S', 'D', 'F', 'G',
   'H', 'J', 'K', 'L', 'M', '%', '`', 
