@@ -2,36 +2,21 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 cd ./programs/blank && make all
  
 # GNU Make 4.2.1
- 
 # Built for x86_64-pc-linux-gnu
- 
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
- 
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
- 
 # This is free software: you are free to change and redistribute it.
- 
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
- 
-# Make data base, printed on Mon Aug 15 13:45:01 2022
- 
+# Make data base, printed on Mon Aug 15 14:03:19 2022
 
 # Variables
- 
 
- 
 # 'override' directive
- 
 GNUMAKEFLAGS := 
- 
 # automatic
- 
 <D = $(patsubst %/,%,$(dir $<))
- 
 # automatic
- 
 ?F = $(notdir $?)
 # environment
 PAPERSIZE = letter
@@ -294,6 +279,7 @@ DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=9bb2675ed3e625c80b42d86
 
 # 7 files, no impossibilities in 1 directories.
 
+ 
 # Implicit Rules
 
 # No implicit rules.
@@ -309,9 +295,7 @@ all:
 #  Needs to be updated (-q is set).
 # automatic
 # @ := all
- 
 # automatic
- 
 # % := 
 # automatic
 # * := 
@@ -371,7 +355,7 @@ clean:
 # strcache performance: lookups = 21 / hit rate = 38%
 # hash-table stats:
 # Load=13/8192=0%, Rehash=0, Collisions=1/21=5%
-# Finished Make data base on Mon Aug 15 13:45:01 2022
+# Finished Make data base on Mon Aug 15 14:03:19 2022
 
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
@@ -380,7 +364,7 @@ clean:
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Aug 15 13:45:01 2022
+# Make data base, printed on Mon Aug 15 14:03:19 2022
 
 # Variables
 
@@ -575,6 +559,7 @@ MAKE_COMMAND := make
 # environment
 OLDPWD = /home/fedi/Desktop/PeachOS/bin
 # default
+ 
 .VARIABLES := 
 # automatic
 *F = $(notdir $*)
@@ -591,7 +576,6 @@ MFLAGS = -pqrR
 # environment
 GDK_BACKEND = x11
 # environment
- 
 LC_PAPER = en_US.UTF-8
 # environment
 QT_ACCESSIBILITY = 1
@@ -718,7 +702,7 @@ all: bin/boot.bin bin/kernel.bin user_programs
 	sudo mount -t vfat ./bin/os.bin /mnt/d
 	# Copy a file over
 	sudo cp ./hello.txt /mnt/d
-	sudo cp ./programs/blank/blank.bin /mnt/d
+	sudo cp ./programs/blank/blank.elf /mnt/d
 	sudo umount /mnt/d
 
 # Not a target:
@@ -811,7 +795,7 @@ src/task/task.c:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-13 18:05:37.111295285
+#  Last modified 2022-08-15 14:03:01.209546862
 #  File has been updated.
 #  Successfully updated.
 
@@ -853,6 +837,7 @@ build/kernel.asm.o: src/kernel.asm
 #  recipe to execute (from 'Makefile', line 24):
 	nasm -f elf -g ./src/kernel.asm -o ./build/kernel.asm.o
 
+ 
 # Not a target:
 src/gdt/gdt.asm:
 #  Implicit rule search has been done.
@@ -869,7 +854,6 @@ build/fs/file.o: src/fs/file.c
 	i686-elf-gcc $(INCLUDES) -I./src/fs $(FLAGS) -std=gnu99 -c ./src/fs/file.c -o ./build/fs/file.o
 
 # Not a target:
- 
 src/memory/paging/paging.asm:
 #  Implicit rule search has been done.
 #  Last modified 2022-08-04 12:13:45.873323464
@@ -1131,6 +1115,7 @@ user_programs:
 # | := 
 # automatic
 # < := 
+ 
 # automatic
 # ^ := 
 # automatic
@@ -1147,7 +1132,6 @@ build/isr80h/misc.o: src/isr80h/misc.c
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 33):
 	i686-elf-gcc $(INCLUDES) -I./src/isr80h $(FLAGS) -std=gnu99 -c ./src/isr80h/misc.c -o ./build/isr80h/misc.o
- 
 
 # Not a target:
 src/disk/disk.c:
@@ -1191,6 +1175,6 @@ src/kernel.c:
 # strcache performance: lookups = 148 / hit rate = 47%
 # hash-table stats:
 # Load=78/8192=1%, Rehash=0, Collisions=1/148=1%
-# Finished Make data base on Mon Aug 15 13:45:01 2022
+# Finished Make data base on Mon Aug 15 14:03:19 2022
 
  

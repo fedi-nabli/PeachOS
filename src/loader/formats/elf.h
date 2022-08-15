@@ -64,7 +64,7 @@ struct elf32_phdr {
   elf32_off p_offset;
   elf32_addr p_vaddr;
   elf32_addr p_paddr;
-  elf32_word p_filessz;
+  elf32_word p_filesz;
   elf32_word p_memsz;
   elf32_word p_flags;
   elf32_word p_align; 
