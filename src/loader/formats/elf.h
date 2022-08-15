@@ -67,7 +67,7 @@ struct elf32_phdr {
   elf32_word p_filesz;
   elf32_word p_memsz;
   elf32_word p_flags;
-  elf32_word p_align; 
+  elf32_word p_align;
 } __attribute__((packed));
 
 struct elf32_shdr {
@@ -80,7 +80,7 @@ struct elf32_shdr {
   elf32_word sh_link;
   elf32_word sh_info;
   elf32_word sh_addralign;
-  elf32_word entsize;
+  elf32_word sh_entsize;
 } __attribute__((packed));
 
 struct elf_header {

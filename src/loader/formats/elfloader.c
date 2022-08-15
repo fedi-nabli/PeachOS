@@ -9,18 +9,18 @@
 #include "kernel.h"
 #include "config.h"
 
-const char* elf_signature[] = {0x7f, 'E', 'L', 'F'};
+const char elf_signature[] = {0x7f, 'E', 'L', 'F'};
 
-static bool elf_valide_signature(void* buffer) {
+static bool elf_valid_signature(void* buffer) {
   return memcmp(buffer, (void*) elf_signature, sizeof(elf_signature)) == 0;
 }
 
 static bool elf_valid_class(struct elf_header* header) {
-  // We only support 32 bit binaries
-  return header->e_ident[EI_NIDENT] == ELFCLASSNONE || header->e_ident[EI_NIDENT] == ELFCLASS32;
+  // We only support 32 bit binaries.
+  return header->e_ident[EI_CLASS] == ELFCLASSNONE || header->e_ident[EI_CLASS] == ELFCLASS32;
 }
 
-static bool elf_valide_encoding(struct elf_header* header) {
+static bool elf_valid_encoding(struct elf_header* header) {
   return header->e_ident[EI_DATA] == ELFDATANONE || header->e_ident[EI_DATA] == ELFDATA2LSB;
 }
 
@@ -80,8 +80,8 @@ void* elf_phys_end(struct elf_file* file) {
   return file->physical_end_address;
 }
 
-int elf_vaildate_loaded(struct elf_header* header) {
-  return (elf_valide_signature(header) && elf_valid_class(header) && elf_valide_encoding(header) && elf_has_program_header(header)) ? PEACHOS_ALL_OK : -EINVARG;
+int elf_validate_loaded(struct elf_header* header) {
+  return (elf_valid_signature(header) && elf_valid_class(header) && elf_valid_encoding(header) && elf_has_program_header(header)) ? PEACHOS_ALL_OK : -EINFORMAT;
 }
 
 int elf_process_phdr_pt_load(struct elf_file* elf_file, struct elf32_phdr* phdr) {
@@ -99,16 +99,17 @@ int elf_process_phdr_pt_load(struct elf_file* elf_file, struct elf32_phdr* phdr)
   return 0;
 }
 
-int elf_process_header(struct elf_file* elf_file, struct elf32_phdr* phdr) {
+int elf_process_pheader(struct elf_file* elf_file, struct elf32_phdr* phdr) {
   int res = 0;
   switch (phdr->p_type) {
     case PT_LOAD:
       res = elf_process_phdr_pt_load(elf_file, phdr);
     break;
   }
+  return res;
 }
 
-int elf_process_headers(struct elf_file* elf_file) {
+int elf_process_pheaders(struct elf_file* elf_file) {
   int res = 0;
   struct elf_header* header = elf_header(elf_file);
   for (int i = 0; i < header->e_phnum; i++) {
@@ -118,14 +119,14 @@ int elf_process_headers(struct elf_file* elf_file) {
       break;
     }
   }
-  
+
   return res;
 }
 
 int elf_process_loaded(struct elf_file* elf_file) {
   int res = 0;
   struct elf_header* header = elf_header(elf_file);
-  res = elf_vaildate_loaded(header);
+  res = elf_validate_loaded(header);
   if (res < 0) {
     goto out;
   }
@@ -150,7 +151,7 @@ int elf_load(const char* filename, struct elf_file** file_out) {
   fd = res;
   struct file_stat stat;
   res = fstat(fd, &stat);
-  if (res <= 0) {
+  if (res < 0) {
     goto out;
   }
 
@@ -161,9 +162,11 @@ int elf_load(const char* filename, struct elf_file** file_out) {
   }
 
   res = elf_process_loaded(elf_file);
+  if(res < 0) {
+    goto out;
+  }
 
   *file_out = elf_file;
-
   out:
     fclose(fd);
     return res;
