@@ -11,7 +11,7 @@ all: ${FILES}
 ./build/peachos.o: ./src/peachos.asm
 	nasm -f elf ./src/peachos.asm -o ./build/peachos.o
 
-./build/stdlib.o: ./src/stdlib.o
+./build/stdlib.o: ./src/stdlib.c
 	i686-elf-gcc ${INCLUDES} $(FLAGS) -std=gnu99 -c ./src/stdlib.c -o ./build/stdlib.o
 
 clean:
