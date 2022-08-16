@@ -5,7 +5,9 @@ cd ./programs/stdlib && make all
  
 make[1]: Entering directory '/home/fedi/Desktop/PeachOS/programs/stdlib'
  
-i686-elf-ld -m elf_i386 -relocatable ./build/start.o -o ./stdlib.elf
+nasm -f elf ./src/peachos.asm -o ./build/peachos.o
+ 
+i686-elf-ld -m elf_i386 -relocatable ./build/start.o ./build/peachos.o -o ./stdlib.elf
  
 make[1]: Leaving directory '/home/fedi/Desktop/PeachOS/programs/stdlib'
  
@@ -13,9 +15,12 @@ cd ./programs/blank && make all
  
 make[1]: Entering directory '/home/fedi/Desktop/PeachOS/programs/blank'
  
+i686-elf-gcc -I../stdlib/src -I./ -std=gnu99 -c ./blank.c -o ./build/blank.o
+ 
 i686-elf-gcc -g -T ./linker.ld -o ./blank.elf -ffreestanding -O0 -nostdlib -fpic -g ./build/blank.o ../stdlib/stdlib.elf
  
 make[1]: Leaving directory '/home/fedi/Desktop/PeachOS/programs/blank'
+ 
 rm -rf ./bin/os.bin
 dd if=./bin/boot.bin >> ./bin/os.bin
 dd if=./bin/kernel.bin >> ./bin/os.bin
