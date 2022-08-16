@@ -2,21 +2,13 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 cd ./programs/stdlib && make all
  
 # GNU Make 4.2.1
- 
 # Built for x86_64-pc-linux-gnu
- 
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
- 
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
- 
 # This is free software: you are free to change and redistribute it.
- 
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
- 
-# Make data base, printed on Tue Aug 16 11:00:21 2022
- 
+# Make data base, printed on Tue Aug 16 16:17:08 2022
 
 # Variables
 
@@ -41,7 +33,7 @@ XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # makefile (from 'Makefile', line 2)
-INCLUDES = 
+INCLUDES = -I./src
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # environment
@@ -242,7 +234,6 @@ LC_NUMERIC = en_US.UTF-8
 LC_MEASUREMENT = en_US.UTF-8
 # environment
 SNAP_NAME = code
- 
 # environment
 LC_ALL = C
 # environment
@@ -255,6 +246,8 @@ GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/bd766e29_6bdc_4c06_b6db_6845c
 GNOME_TERMINAL_SERVICE = :1.71
 # default
 SUFFIXES := 
+# makefile (from 'Makefile', line 3)
+FLAGS = -g
 # environment
 SNAP_REEXEC = 
 # environment
@@ -278,19 +271,20 @@ VSCODE_PID = 1847
 # environment
 DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=b74a8655e4a1cca179a92f3b62fb6658
 # makefile (from 'Makefile', line 1)
-FILES = ./build/start.o ./build/peachos.o
+FILES = ./build/start.o ./build/peachos.o ./build/stdlib.o
 # variable set hash-table stats:
-# Load=129/1024=13%, Rehash=0, Collisions=20/161=12%
+# Load=130/1024=13%, Rehash=0, Collisions=20/162=12%
 
 # Pattern-specific Variable Values
 
 # No pattern-specific variable values.
+ 
 
 # Directories
 
-# . (device 2053, inode 1442616): 5 files, no impossibilities.
+# . (device 2053, inode 1442616): 6 files, no impossibilities.
 
-# 5 files, no impossibilities in 1 directories.
+# 6 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -298,7 +292,7 @@ FILES = ./build/start.o ./build/peachos.o
 
 # Files
 
-all: build/start.o build/peachos.o
+all: build/start.o build/peachos.o build/stdlib.o
 #  Command line target.
 #  Implicit rule search has not been done.
 #  File does not exist.
@@ -306,7 +300,7 @@ all: build/start.o build/peachos.o
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/3=0%
-#  recipe to execute (from 'Makefile', line 5):
+#  recipe to execute (from 'Makefile', line 6):
 	i686-elf-ld -m elf_i386 -relocatable ${FILES} -o ./stdlib.elf
 
 # Not a target:
@@ -318,21 +312,21 @@ all: build/start.o build/peachos.o
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-16 10:59:29.085390129
+#  Last modified 2022-08-16 15:16:59.796527639
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/peachos.asm:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-16 10:52:04.092850741
+#  Last modified 2022-08-16 16:15:20.647696515
 #  File has been updated.
 #  Successfully updated.
 
 build/peachos.o: src/peachos.asm
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: ''
-#  File does not exist.
+#  Last modified 2022-08-16 16:03:21.988528294
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # automatic
@@ -353,7 +347,7 @@ build/peachos.o: src/peachos.asm
 # ? := src/peachos.asm
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/11=9%
-#  recipe to execute (from 'Makefile', line 11):
+#  recipe to execute (from 'Makefile', line 12):
 	nasm -f elf ./src/peachos.asm -o ./build/peachos.o
 
 # Not a target:
@@ -366,9 +360,22 @@ clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 14):
+#  recipe to execute (from 'Makefile', line 18):
 	rm -rf ${FILES}
 	rm ./stdlib.elf
+
+build/stdlib.o: src/stdlib.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 15):
+	i686-elf-gcc ${INCLUDES} $(FLAGS) -std=gnu99 -c ./src/stdlib.c -o ./build/stdlib.o
+
+# Not a target:
+src/stdlib.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/start.asm:
@@ -379,27 +386,27 @@ src/start.asm:
 
 build/start.o: src/start.asm
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:56.946959202
+#  Last modified 2022-08-16 16:03:21.976528171
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 8):
+#  recipe to execute (from 'Makefile', line 9):
 	nasm -f elf ./src/start.asm -o ./build/start.o
 
 # files hash-table stats:
-# Load=9/1024=1%, Rehash=0, Collisions=0/27=0%
+# Load=11/1024=1%, Rehash=0, Collisions=0/32=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 15 / storage = 145 B / avg = 9 B
-# current buf: size = 8162 B / used = 145 B / count = 15 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 18 / storage = 184 B / avg = 10 B
+# current buf: size = 8162 B / used = 184 B / count = 18 / avg = 10 B
 
-# strcache performance: lookups = 27 / hit rate = 44%
+# strcache performance: lookups = 32 / hit rate = 43%
 # hash-table stats:
-# Load=15/8192=0%, Rehash=0, Collisions=1/27=4%
-# Finished Make data base on Tue Aug 16 11:00:21 2022
+# Load=18/8192=0%, Rehash=0, Collisions=1/32=3%
+# Finished Make data base on Tue Aug 16 16:17:08 2022
 
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
@@ -408,7 +415,7 @@ build/start.o: src/start.asm
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Aug 16 11:00:21 2022
+# Make data base, printed on Tue Aug 16 16:17:08 2022
 
 # Variables
 
@@ -523,7 +530,6 @@ SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
 DISPLAY = :0
 # environment
- 
 SNAP_INSTANCE_KEY = 
 # environment
 PWD = /home/fedi/Desktop/PeachOS
@@ -553,6 +559,7 @@ APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void
 # environment
 SNAP_CONTEXT = NPiVBByR-ILZcYFZwF32YrZpy1zQPWbu62cBFkeg0YS9mbpA3fwq
+ 
 # automatic
 +F = $(notdir $+)
 # environment
@@ -670,7 +677,7 @@ VSCODE_PID = 1847
 # environment
 DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=b74a8655e4a1cca179a92f3b62fb6658
 # makefile (from 'Makefile', line 1)
-FILES = ./build/kernel.asm.o ./build/kernel.o ./build/isr80h/misc.o ./build/loader/formats/elf.o ./build/loader/formats/elfloader.o ./build/isr80h/isr80h.o ./build/keyboard/classic.o ./build/isr80h/io.o ./build/keyboard/keyboard.o ./build/disk/disk.o ./build/disk/streamer.o ./build/fs/file.o ./build/fs/fat/fat16.o ./build/fs/pparser.o ./build/string/string.o ./build/idt/idt.asm.o ./build/idt/idt.o ./build/gdt/gdt.asm.o ./build/task/tss.asm.o ./build/task/task.o ./build/task/task.asm.o ./build/task/process.o ./build/gdt/gdt.o ./build/memory/memory.o ./build/io/io.asm.o ./build/memory/heap/heap.o ./build/memory/heap/kheap.o ./build/memory/paging/paging.o ./build/memory/paging/paging.asm.o
+FILES = ./build/kernel.asm.o ./build/kernel.o ./build/isr80h/misc.o ./build/loader/formats/elf.o ./build/loader/formats/elfloader.o ./build/isr80h/isr80h.o ./build/isr80h/heap.o ./build/keyboard/classic.o ./build/isr80h/io.o ./build/keyboard/keyboard.o ./build/disk/disk.o ./build/disk/streamer.o ./build/fs/file.o ./build/fs/fat/fat16.o ./build/fs/pparser.o ./build/string/string.o ./build/idt/idt.asm.o ./build/idt/idt.o ./build/gdt/gdt.asm.o ./build/task/tss.asm.o ./build/task/task.o ./build/task/task.asm.o ./build/task/process.o ./build/gdt/gdt.o ./build/memory/memory.o ./build/io/io.asm.o ./build/memory/heap/heap.o ./build/memory/heap/kheap.o ./build/memory/paging/paging.o ./build/memory/paging/paging.asm.o
 # variable set hash-table stats:
 # Load=129/1024=13%, Rehash=0, Collisions=18/162=11%
 
@@ -692,7 +699,7 @@ FILES = ./build/kernel.asm.o ./build/kernel.o ./build/isr80h/misc.o ./build/load
 
 build/isr80h/isr80h.o: src/isr80h/isr80h.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:54.824299272
+#  Last modified 2022-08-16 16:03:20.764515702
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 42):
@@ -700,10 +707,10 @@ build/isr80h/isr80h.o: src/isr80h/isr80h.c
 
 build/memory/memory.o: src/memory/memory.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:56.572560791
+#  Last modified 2022-08-16 16:03:21.716525497
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 75):
+#  recipe to execute (from 'Makefile', line 78):
 	i686-elf-gcc $(INCLUDES) -I./src/memory $(FLAGS) -std=gnu99 -c ./src/memory/memory.c -o ./build/memory/memory.o
 
 # Not a target:
@@ -715,7 +722,7 @@ src/keyboard/classic.c:
 
 build/loader/formats/elfloader.o: src/loader/formats/elfloader.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:54.751715001
+#  Last modified 2022-08-16 16:03:20.716515209
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 36):
@@ -723,18 +730,18 @@ build/loader/formats/elfloader.o: src/loader/formats/elfloader.c
 
 build/disk/streamer.o: src/disk/streamer.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:55.408649801
+#  Last modified 2022-08-16 16:03:20.984517966
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 96):
+#  recipe to execute (from 'Makefile', line 99):
 	i686-elf-gcc $(INCLUDES) -I./src/disk $(FLAGS) -std=gnu99 -c ./src/disk/streamer.c -o ./build/disk/streamer.o
 
 build/string/string.o: src/string/string.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:55.960609389
+#  Last modified 2022-08-16 16:03:21.228520476
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 108):
+#  recipe to execute (from 'Makefile', line 111):
 	i686-elf-gcc $(INCLUDES) -I./src/string $(FLAGS) -std=gnu99 -c ./src/string/string.c -o ./build/string/string.o
 
 all: bin/boot.bin bin/kernel.bin user_programs
@@ -785,10 +792,10 @@ src/fs/pparser.c:
 
 build/isr80h/io.o: src/isr80h/io.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:55.037990809
+#  Last modified 2022-08-16 16:03:20.864516731
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 51):
+#  recipe to execute (from 'Makefile', line 54):
 	i686-elf-gcc $(INCLUDES) -I./src/isr80h $(FLAGS) -std=gnu99 -c ./src/isr80h/io.c -o ./build/isr80h/io.o
 
 # Not a target:
@@ -800,8 +807,7 @@ src/idt/idt.c:
 
 bin/boot.bin: src/boot/boot.asm
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:54.231527724
- 
+#  Last modified 2022-08-16 16:03:20.560513604
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 21):
@@ -809,18 +815,18 @@ bin/boot.bin: src/boot/boot.asm
 
 build/io/io.asm.o: src/io/io.asm
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:56.58061237
+#  Last modified 2022-08-16 16:03:21.720525538
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 78):
+#  recipe to execute (from 'Makefile', line 81):
 	nasm -f elf -g ./src/io/io.asm -o ./build/io/io.asm.o
 
 build/task/process.o: src/task/process.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:56.419580796
+#  Last modified 2022-08-16 16:03:21.58852418
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 72):
+#  recipe to execute (from 'Makefile', line 75):
 	i686-elf-gcc $(INCLUDES) -I./src/task $(FLAGS) -std=gnu99 -c ./src/task/process.c -o ./build/task/process.o
 
 # Not a target:
@@ -830,6 +836,7 @@ src/memory/heap/heap.c:
 #  File has been updated.
 #  Successfully updated.
 
+ 
 # Not a target:
 src/task/task.c:
 #  Implicit rule search has been done.
@@ -853,7 +860,7 @@ src/loader/formats/elf.c:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-16 00:08:28.778521838
+#  Last modified 2022-08-16 16:03:32.324634541
 #  File has been updated.
 #  Successfully updated.
 
@@ -866,18 +873,18 @@ src/io/io.asm:
 
 build/gdt/gdt.asm.o: src/gdt/gdt.asm
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:56.186085013
+#  Last modified 2022-08-16 16:03:21.41652241
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 57):
+#  recipe to execute (from 'Makefile', line 60):
 	nasm -f elf -g ./src/gdt/gdt.asm -o ./build/gdt/gdt.asm.o
 
 build/memory/paging/paging.asm.o: src/memory/paging/paging.asm
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:56.846314468
+#  Last modified 2022-08-16 16:03:21.932527718
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 90):
+#  recipe to execute (from 'Makefile', line 93):
 	nasm -f elf -g ./src/memory/paging/paging.asm -o ./build/memory/paging/paging.asm.o
 
 # Not a target:
@@ -889,7 +896,7 @@ src/isr80h/misc.c:
 
 build/kernel.asm.o: src/kernel.asm
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:54.239592644
+#  Last modified 2022-08-16 16:03:20.564513645
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 24):
@@ -904,11 +911,18 @@ src/gdt/gdt.asm:
 
 build/fs/file.o: src/fs/file.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:55.557719179
+#  Last modified 2022-08-16 16:03:21.024518378
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 102):
+#  recipe to execute (from 'Makefile', line 105):
 	i686-elf-gcc $(INCLUDES) -I./src/fs $(FLAGS) -std=gnu99 -c ./src/fs/file.c -o ./build/fs/file.o
+
+# Not a target:
+src/isr80h/heap.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-16 15:35:37.658040894
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 src/memory/paging/paging.asm:
@@ -927,21 +941,21 @@ src/memory/heap/kheap.c:
 # Not a target:
 src/isr80h/isr80h.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-14 23:04:21.600857713
+#  Last modified 2022-08-16 15:31:08.979637122
 #  File has been updated.
 #  Successfully updated.
 
 build/gdt/gdt.o: src/gdt/gdt.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:56.500096583
+#  Last modified 2022-08-16 16:03:21.644524756
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 60):
+#  recipe to execute (from 'Makefile', line 63):
 	i686-elf-gcc $(INCLUDES) -I./src/gdt $(FLAGS) -std=gnu99 -c ./src/gdt/gdt.c -o ./build/gdt/gdt.o
 
-bin/kernel.bin: build/kernel.asm.o build/kernel.o build/isr80h/misc.o build/loader/formats/elf.o build/loader/formats/elfloader.o build/isr80h/isr80h.o build/keyboard/classic.o build/isr80h/io.o build/keyboard/keyboard.o build/disk/disk.o build/disk/streamer.o build/fs/file.o build/fs/fat/fat16.o build/fs/pparser.o build/string/string.o build/idt/idt.asm.o build/idt/idt.o build/gdt/gdt.asm.o build/task/tss.asm.o build/task/task.o build/task/task.asm.o build/task/process.o build/gdt/gdt.o build/memory/memory.o build/io/io.asm.o build/memory/heap/heap.o build/memory/heap/kheap.o build/memory/paging/paging.o build/memory/paging/paging.asm.o
+bin/kernel.bin: build/kernel.asm.o build/kernel.o build/isr80h/misc.o build/loader/formats/elf.o build/loader/formats/elfloader.o build/isr80h/isr80h.o build/isr80h/heap.o build/keyboard/classic.o build/isr80h/io.o build/keyboard/keyboard.o build/disk/disk.o build/disk/streamer.o build/fs/file.o build/fs/fat/fat16.o build/fs/pparser.o build/string/string.o build/idt/idt.asm.o build/idt/idt.o build/gdt/gdt.asm.o build/task/tss.asm.o build/task/task.o build/task/task.asm.o build/task/process.o build/gdt/gdt.o build/memory/memory.o build/io/io.asm.o build/memory/heap/heap.o build/memory/heap/kheap.o build/memory/paging/paging.o build/memory/paging/paging.asm.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:56.926830255
+#  Last modified 2022-08-16 16:03:21.97252813
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 17):
@@ -950,18 +964,18 @@ bin/kernel.bin: build/kernel.asm.o build/kernel.o build/isr80h/misc.o build/load
 
 build/task/tss.asm.o: src/task/tss.asm
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:56.190110803
+#  Last modified 2022-08-16 16:03:21.420522451
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 63):
+#  recipe to execute (from 'Makefile', line 66):
 	nasm -f elf -g ./src/task/tss.asm -o ./build/task/tss.asm.o
 
 build/disk/disk.o: src/disk/disk.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:55.291811641
+#  Last modified 2022-08-16 16:03:20.944517554
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 93):
+#  recipe to execute (from 'Makefile', line 96):
 	i686-elf-gcc $(INCLUDES) -I./src/disk $(FLAGS) -std=gnu99 -c ./src/disk/disk.c -o ./build/disk/disk.o
 
 # Not a target:
@@ -980,10 +994,10 @@ src/memory/memory.c:
 
 build/memory/paging/paging.o: src/memory/paging/paging.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:56.838262889
+#  Last modified 2022-08-16 16:03:21.916527553
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 87):
+#  recipe to execute (from 'Makefile', line 90):
 	i686-elf-gcc $(INCLUDES) -I./src/memory/paging $(FLAGS) -std=gnu99 -c ./src/memory/paging/paging.c -o ./build/memory/paging/paging.o
 
 # Not a target:
@@ -1009,7 +1023,7 @@ src/string/string.c:
 
 build/kernel.o: src/kernel.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:54.509767431
+#  Last modified 2022-08-16 16:03:20.600514016
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 27):
@@ -1030,15 +1044,15 @@ src/task/tss.asm:
 
 build/keyboard/classic.o: src/keyboard/classic.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:54.937208139
+#  Last modified 2022-08-16 16:03:20.82451632
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 48):
+#  recipe to execute (from 'Makefile', line 51):
 	i686-elf-gcc $(INCLUDES) -I./src/keyboard $(FLAGS) -std=gnu99 -c ./src/keyboard/classic.c -o ./build/keyboard/classic.o
 
 build/idt/idt.asm.o: src/idt/idt.asm
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:56.093491858
+#  Last modified 2022-08-16 16:03:21.328521505
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 30):
@@ -1053,16 +1067,16 @@ src/isr80h/io.c:
 
 build/task/task.asm.o: src/task/task.asm
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:56.310884483
+#  Last modified 2022-08-16 16:03:21.496523233
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 69):
+#  recipe to execute (from 'Makefile', line 72):
 	nasm -f elf -g ./src/task/task.asm -o ./build/task/task.asm.o
 
 # Not a target:
 src/task/process.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-15 23:43:26.022406606
+#  Last modified 2022-08-16 15:55:58.379788064
 #  File has been updated.
 #  Successfully updated.
 
@@ -1070,7 +1084,7 @@ clean: user_programs_clean
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 119):
+#  recipe to execute (from 'Makefile', line 122):
 	rm -rf ./bin/boot.bin
 	rm -rf ./bin/kernel.bin
 	rm -rf ./bin/os.bin
@@ -1079,11 +1093,10 @@ clean: user_programs_clean
 
 build/fs/fat/fat16.o: src/fs/fat/fat16.c
 #  Implicit rule search has not been done.
- 
-#  Last modified 2022-08-16 10:59:55.779308794
+#  Last modified 2022-08-16 16:03:21.124519406
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 105):
+#  recipe to execute (from 'Makefile', line 108):
 	i686-elf-gcc $(INCLUDES) -I./src/fs -I./src/fat $(FLAGS) -std=gnu99 -c ./src/fs/fat/fat16.c -o ./build/fs/fat/fat16.o
 
 # Not a target:
@@ -1095,12 +1108,13 @@ src/idt/idt.asm:
 
 build/fs/pparser.o: src/fs/pparser.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:55.876002445
+#  Last modified 2022-08-16 16:03:21.188520064
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 99):
+#  recipe to execute (from 'Makefile', line 102):
 	i686-elf-gcc $(INCLUDES) -I./src/fs $(FLAGS) -std=gnu99 -c ./src/fs/pparser.c -o ./build/fs/pparser.o
 
+ 
 # Not a target:
 src/task/task.asm:
 #  Implicit rule search has been done.
@@ -1110,47 +1124,47 @@ src/task/task.asm:
 
 build/keyboard/keyboard.o: src/keyboard/keyboard.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:55.158857872
+#  Last modified 2022-08-16 16:03:20.908517184
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 45):
+#  recipe to execute (from 'Makefile', line 48):
 	i686-elf-gcc $(INCLUDES) -I./src/keyboard $(FLAGS) -std=gnu99 -c ./src/keyboard/keyboard.c -o ./build/keyboard/keyboard.o
 
 build/idt/idt.o: src/idt/idt.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:56.178033434
+#  Last modified 2022-08-16 16:03:21.400522245
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 54):
+#  recipe to execute (from 'Makefile', line 57):
 	i686-elf-gcc $(INCLUDES) -I./src/idt $(FLAGS) -std=gnu99 -c ./src/idt/idt.c -o ./build/idt/idt.o
 
 build/memory/heap/heap.o: src/memory/heap/heap.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:56.669179736
+#  Last modified 2022-08-16 16:03:21.804526402
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 81):
+#  recipe to execute (from 'Makefile', line 84):
 	i686-elf-gcc $(INCLUDES) -I./src/memory/heap $(FLAGS) -std=gnu99 -c ./src/memory/heap/heap.c -o ./build/memory/heap/heap.o
 
 build/task/task.o: src/task/task.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:56.298807115
+#  Last modified 2022-08-16 16:03:21.496523233
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 66):
+#  recipe to execute (from 'Makefile', line 69):
 	i686-elf-gcc $(INCLUDES) -I./src/task $(FLAGS) -std=gnu99 -c ./src/task/task.c -o ./build/task/task.o
 
 build/memory/heap/kheap.o: src/memory/heap/kheap.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:56.729566577
+#  Last modified 2022-08-16 16:03:21.856526936
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 84):
+#  recipe to execute (from 'Makefile', line 87):
 	i686-elf-gcc $(INCLUDES) -I./src/memory/heap $(FLAGS) -std=gnu99 -c ./src/memory/heap/kheap.c -o ./build/memory/heap/kheap.o
 
 build/loader/formats/elf.o: src/loader/formats/elf.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:54.638806135
+#  Last modified 2022-08-16 16:03:20.656514591
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 33):
@@ -1194,13 +1208,13 @@ user_programs:
 # ? := 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=3/15=20%
-#  recipe to execute (from 'Makefile', line 111):
+#  recipe to execute (from 'Makefile', line 114):
 	cd ./programs/stdlib && $(MAKE) all
 	cd ./programs/blank && $(MAKE) all
 
 build/isr80h/misc.o: src/isr80h/misc.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-16 10:59:54.558156945
+#  Last modified 2022-08-16 16:03:20.624514262
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 39):
@@ -1224,7 +1238,7 @@ user_programs_clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 115):
+#  recipe to execute (from 'Makefile', line 118):
 	cd ./programs/stdlib && $(MAKE) clean
 	cd ./programs/blank && $(MAKE) clean
 
@@ -1235,20 +1249,28 @@ src/kernel.c:
 #  File has been updated.
 #  Successfully updated.
 
+build/isr80h/heap.o: src/isr80h/heap.c
+#  Implicit rule search has not been done.
+#  Last modified 2022-08-16 16:03:20.788515949
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 45):
+	i686-elf-gcc $(INCLUDES) -I./src/isr80h $(FLAGS) -std=gnu99 -c ./src/isr80h/heap.c -o ./build/isr80h/heap.o
+
 # files hash-table stats:
-# Load=68/1024=7%, Rehash=0, Collisions=10/176=6%
+# Load=70/1024=7%, Rehash=0, Collisions=10/181=6%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 82 / storage = 1416 B / avg = 17 B
-# current buf: size = 8162 B / used = 1416 B / count = 82 / avg = 17 B
+# strcache buffers: 1 (0) / strings = 84 / storage = 1454 B / avg = 17 B
+# current buf: size = 8162 B / used = 1454 B / count = 84 / avg = 17 B
 
-# strcache performance: lookups = 156 / hit rate = 47%
+# strcache performance: lookups = 160 / hit rate = 47%
 # hash-table stats:
-# Load=82/8192=1%, Rehash=0, Collisions=1/156=1%
-# Finished Make data base on Tue Aug 16 11:00:21 2022
+# Load=84/8192=1%, Rehash=0, Collisions=1/160=1%
+# Finished Make data base on Tue Aug 16 16:17:08 2022
 
  
