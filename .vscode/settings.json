@@ -6,6 +6,5 @@
     "string.h": "c",
     "idt.h": "c",
     "stddef.h": "c"
-  },
-  "C_Cpp.errorSquiggles": "Disabled"
+  }
 }
