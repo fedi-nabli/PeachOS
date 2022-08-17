@@ -492,6 +492,7 @@ struct fat_item* fat16_new_fat_item_for_directory_item(struct disk* disk, struct
   if (item->attribute & FAT_FILE_SUBDIRECTORY) {
     f_item->directory = fat16_load_fat_directory(disk, item);
     f_item->type = FAT_ITEM_TYPE_DIRECTORY;
+    return f_item;
   }
 
   f_item->type = FAT_ITEM_TYPE_FILE;
