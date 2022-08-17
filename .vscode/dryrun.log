@@ -17,6 +17,14 @@ i686-elf-gcc -g -T ./linker.ld -o ./blank.elf -ffreestanding -O0 -nostdlib -fpic
  
 make[1]: Leaving directory '/home/fedi/Desktop/PeachOS/programs/blank'
  
+cd ./programs/shell && make all
+ 
+make[1]: Entering directory '/home/fedi/Desktop/PeachOS/programs/shell'
+ 
+i686-elf-gcc -g -T ./linker.ld -o ./shell.elf -ffreestanding -O0 -nostdlib -fpic -g ./build/shell.o ../stdlib/stdlib.elf
+ 
+make[1]: Leaving directory '/home/fedi/Desktop/PeachOS/programs/shell'
+ 
 rm -rf ./bin/os.bin
 dd if=./bin/boot.bin >> ./bin/os.bin
 dd if=./bin/kernel.bin >> ./bin/os.bin
@@ -25,6 +33,7 @@ sudo mount -t vfat ./bin/os.bin /mnt/d
 # Copy a file over
 sudo cp ./hello.txt /mnt/d
 sudo cp ./programs/blank/blank.elf /mnt/d
+sudo cp ./programs/shell/shell.elf /mnt/d
 sudo umount /mnt/d
 make: Leaving directory '/home/fedi/Desktop/PeachOS'
  

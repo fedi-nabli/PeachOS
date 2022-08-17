@@ -5,6 +5,7 @@
     "misc.h": "c",
     "string.h": "c",
     "idt.h": "c",
-    "stddef.h": "c"
+    "stddef.h": "c",
+    "stdlib.h": "c"
   }
 }
