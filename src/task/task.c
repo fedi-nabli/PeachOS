@@ -90,6 +90,16 @@ int task_free(struct task* task) {
   return 0;
 }
 
+void task_next() {
+  struct task* next_task = task_get_next();
+  if (!next_task) {
+    panic("No more tasks!\n");
+  }
+
+  task_switch(next_task);
+  task_return(&next_task->registers);
+}
+
 int task_switch(struct task* task) {
   current_task = task;
   paging_switch(task->page_directory);
