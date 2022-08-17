@@ -1,36 +1,62 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/fedi/Desktop/PeachOS'
- 
+nasm -f bin ./src/boot/boot.asm -o ./bin/boot.bin
+nasm -f elf -g ./src/kernel.asm -o ./build/kernel.asm.o
+i686-elf-gcc -I./src -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/kernel.c -o ./build/kernel.o
+i686-elf-gcc -I./src -I./src/isr80h -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/isr80h/misc.c -o ./build/isr80h/misc.o
+i686-elf-gcc -I./src -I./src/isr80h -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/isr80h/process.c -o ./build/isr80h/process.o
+i686-elf-gcc -I./src -I./src/laoder/formats -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/loader/formats/elf.c -o ./build/loader/formats/elf.o
+i686-elf-gcc -I./src -I./src/laoder/formats -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/loader/formats/elfloader.c -o ./build/loader/formats/elfloader.o
+i686-elf-gcc -I./src -I./src/isr80h -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/isr80h/isr80h.c -o ./build/isr80h/isr80h.o
+i686-elf-gcc -I./src -I./src/isr80h -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/isr80h/heap.c -o ./build/isr80h/heap.o
+i686-elf-gcc -I./src -I./src/keyboard -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/keyboard/classic.c -o ./build/keyboard/classic.o
+i686-elf-gcc -I./src -I./src/isr80h -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/isr80h/io.c -o ./build/isr80h/io.o
+i686-elf-gcc -I./src -I./src/keyboard -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/keyboard/keyboard.c -o ./build/keyboard/keyboard.o
+i686-elf-gcc -I./src -I./src/disk -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/disk/disk.c -o ./build/disk/disk.o
+i686-elf-gcc -I./src -I./src/disk -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/disk/streamer.c -o ./build/disk/streamer.o
+i686-elf-gcc -I./src -I./src/fs -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/fs/file.c -o ./build/fs/file.o
+i686-elf-gcc -I./src -I./src/fs -I./src/fat -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/fs/fat/fat16.c -o ./build/fs/fat/fat16.o
+i686-elf-gcc -I./src -I./src/fs -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/fs/pparser.c -o ./build/fs/pparser.o
+i686-elf-gcc -I./src -I./src/string -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/string/string.c -o ./build/string/string.o
+nasm -f elf -g ./src/idt/idt.asm -o ./build/idt/idt.asm.o
+i686-elf-gcc -I./src -I./src/idt -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/idt/idt.c -o ./build/idt/idt.o
+nasm -f elf -g ./src/gdt/gdt.asm -o ./build/gdt/gdt.asm.o
+nasm -f elf -g ./src/task/tss.asm -o ./build/task/tss.asm.o
+i686-elf-gcc -I./src -I./src/task -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/task/task.c -o ./build/task/task.o
+nasm -f elf -g ./src/task/task.asm -o ./build/task/task.asm.o
+i686-elf-gcc -I./src -I./src/task -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/task/process.c -o ./build/task/process.o
+i686-elf-gcc -I./src -I./src/gdt -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/gdt/gdt.c -o ./build/gdt/gdt.o
+i686-elf-gcc -I./src -I./src/memory -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/memory/memory.c -o ./build/memory/memory.o
+nasm -f elf -g ./src/io/io.asm -o ./build/io/io.asm.o
+i686-elf-gcc -I./src -I./src/memory/heap -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/memory/heap/heap.c -o ./build/memory/heap/heap.o
+i686-elf-gcc -I./src -I./src/memory/heap -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/memory/heap/kheap.c -o ./build/memory/heap/kheap.o
+i686-elf-gcc -I./src -I./src/memory/paging -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/memory/paging/paging.c -o ./build/memory/paging/paging.o
+nasm -f elf -g ./src/memory/paging/paging.asm -o ./build/memory/paging/paging.asm.o
+i686-elf-ld -g -relocatable ./build/kernel.asm.o ./build/kernel.o ./build/isr80h/misc.o ./build/isr80h/process.o ./build/loader/formats/elf.o ./build/loader/formats/elfloader.o ./build/isr80h/isr80h.o ./build/isr80h/heap.o ./build/keyboard/classic.o ./build/isr80h/io.o ./build/keyboard/keyboard.o ./build/disk/disk.o ./build/disk/streamer.o ./build/fs/file.o ./build/fs/fat/fat16.o ./build/fs/pparser.o ./build/string/string.o ./build/idt/idt.asm.o ./build/idt/idt.o ./build/gdt/gdt.asm.o ./build/task/tss.asm.o ./build/task/task.o ./build/task/task.asm.o ./build/task/process.o ./build/gdt/gdt.o ./build/memory/memory.o ./build/io/io.asm.o ./build/memory/heap/heap.o ./build/memory/heap/kheap.o ./build/memory/paging/paging.o ./build/memory/paging/paging.asm.o -o ./build/kernelfull.o
+i686-elf-gcc -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -T ./src/linker.ld -o ./bin/kernel.bin -ffreestanding -O0 -nostdlib ./build/kernelfull.o
 cd ./programs/stdlib && make all
- 
 make[1]: Entering directory '/home/fedi/Desktop/PeachOS/programs/stdlib'
- 
 nasm -f elf ./src/start.asm -o ./build/start.asm.o
- 
 i686-elf-gcc -I./src -g -ffreestanding  -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/start.c -o ./build/start.o
- 
+nasm -f elf ./src/peachos.asm -o ./build/peachos.asm.o
+i686-elf-gcc -I./src -g -ffreestanding  -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/peachos.c -o ./build/peachos.o
+i686-elf-gcc -I./src -g -ffreestanding  -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/stdlib.c -o ./build/stdlib.o
+i686-elf-gcc -I./src -g -ffreestanding  -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/stdio.c -o ./build/stdio.o
+i686-elf-gcc -I./src -g -ffreestanding  -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/string.c -o ./build/string.o
+i686-elf-gcc -I./src -g -ffreestanding  -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/memory.c -o ./build/memory.o
 i686-elf-ld -m elf_i386 -relocatable ./build/start.asm.o ./build/start.o ./build/peachos.asm.o ./build/peachos.o ./build/stdlib.o ./build/stdio.o ./build/string.o ./build/memory.o -o ./stdlib.elf
- 
 make[1]: Leaving directory '/home/fedi/Desktop/PeachOS/programs/stdlib'
- 
 cd ./programs/blank && make all
- 
 make[1]: Entering directory '/home/fedi/Desktop/PeachOS/programs/blank'
- 
 i686-elf-gcc -I../stdlib/src -I./ -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./blank.c -o ./build/blank.o
- 
 i686-elf-gcc -g -T ./linker.ld -o ./blank.elf -ffreestanding -O0 -nostdlib -fpic -g ./build/blank.o ../stdlib/stdlib.elf
- 
 make[1]: Leaving directory '/home/fedi/Desktop/PeachOS/programs/blank'
- 
 cd ./programs/shell && make all
  
 make[1]: Entering directory '/home/fedi/Desktop/PeachOS/programs/shell'
- 
+i686-elf-gcc -I../stdlib/src -I./ -g -ffreestanding  -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wunused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99 -c ./src/shell.c -o ./build/shell.o
 i686-elf-gcc -g -T ./linker.ld -o ./shell.elf -ffreestanding -O0 -nostdlib -fpic -g ./build/shell.o ../stdlib/stdlib.elf
- 
 make[1]: Leaving directory '/home/fedi/Desktop/PeachOS/programs/shell'
- 
 rm -rf ./bin/os.bin
 dd if=./bin/boot.bin >> ./bin/os.bin
 dd if=./bin/kernel.bin >> ./bin/os.bin
