@@ -1,11 +1,10 @@
 make --dry-run --keep-going --print-directory
 make: Entering directory '/home/fedi/Desktop/PeachOS'
- 
 cd ./programs/stdlib && make all
  
 make[1]: Entering directory '/home/fedi/Desktop/PeachOS/programs/stdlib'
  
-i686-elf-ld -m elf_i386 -relocatable ./build/start.o ./build/peachos.asm.o ./build/peachos.o ./build/stdlib.o ./build/stdio.o -o ./stdlib.elf
+i686-elf-ld -m elf_i386 -relocatable ./build/start.o ./build/peachos.asm.o ./build/peachos.o ./build/stdlib.o ./build/stdio.o ./build/string.o ./build/memory.o -o ./stdlib.elf
  
 make[1]: Leaving directory '/home/fedi/Desktop/PeachOS/programs/stdlib'
  
